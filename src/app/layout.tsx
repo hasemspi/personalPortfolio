@@ -1,6 +1,9 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import dynamic from "next/dynamic";
+import { cookies } from "next/headers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,18 +21,29 @@ export const metadata: Metadata = {
   description: "we are development personal",
 };
 
+const AppThemeProvider = dynamic(() => import("./Components/context/theme"), {
+  ssr: false,
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = cookies().get("__theme__")?.value || "system";
+  
   return (
-    <html lang="en">
+    <html
+      className={theme}
+      style={theme !== "system" ? { colorScheme: theme } : {}}
+      lang="en"
+    >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex flex-col h-full w-full overflow-hidden`}
       >
-         
-        {children}
+        <AppThemeProvider attribute="class" defaultTheme={theme} enableSystem>
+          {children}
+        </AppThemeProvider>
       </body>
     </html>
   );

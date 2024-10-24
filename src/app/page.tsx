@@ -1,11 +1,14 @@
 
-import MainHeader from './../shared/dashboard/header/MainHeader';
+import MainHeaderNav from './header';
 const HomePage = () => {
   return (
-    <div>
-      <MainHeader/>
-      <h1 className="text-center text-4xl h-full">Hello Home page</h1>
+    <>
+        <MainHeaderNav/>
+    <div className='container'>
+
     </div>
+    </>
+
   );
 };
 

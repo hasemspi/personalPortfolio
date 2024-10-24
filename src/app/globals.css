@@ -25,3 +25,19 @@ body {
     text-wrap: balance;
   }
 }
+
+/* styles/globals.css */
+html {
+  --color-background: #ffffff;
+  --color-text: #000000;
+}
+
+html.dark {
+  --color-background: #e91c1c;
+  --color-text: #ffffff;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
